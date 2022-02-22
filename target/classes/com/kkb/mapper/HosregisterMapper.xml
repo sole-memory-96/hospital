@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kkb.mapper.HosregisterMapper">
+  <resultMap id="BaseResultMap" type="com.kkb.pojo.Hosregister">
+    <id column="hos_id" jdbcType="INTEGER" property="hos_id" />
+    <result column="hos_name" jdbcType="VARCHAR" property="hos_name" />
+    <result column="hos_idCard" jdbcType="VARCHAR" property="hos_idCard" />
+    <result column="hos_medical" jdbcType="VARCHAR" property="hos_medical" />
+    <result column="hos_regPrice" jdbcType="DOUBLE" property="hos_regPrice" />
+    <result column="hos_phone" jdbcType="VARCHAR" property="hos_phone" />
+    <result column="hos_selfPrice" jdbcType="INTEGER" property="hos_selfPrice" />
+    <result column="hos_sex" jdbcType="INTEGER" property="hos_sex" />
+    <result column="hos_age" jdbcType="INTEGER" property="hos_age" />
+    <result column="hos_work" jdbcType="VARCHAR" property="hos_work" />
+    <result column="hos_lookDoctor" jdbcType="INTEGER" property="hos_lookDoctor" />
+    <result column="d_id" jdbcType="INTEGER" property="d_id" />
+    <result column="hos_remark" jdbcType="VARCHAR" property="hos_remark" />
+    <result column="hos_state" jdbcType="INTEGER" property="hos_state" />
+    <result column="hos_date" jdbcType="TIMESTAMP" property="hos_date" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hos_id, hos_name, hos_idCard, hos_medical, hos_regPrice, hos_phone, hos_selfPrice, 
+    hos_sex, hos_age, hos_work, hos_lookDoctor, d_id, hos_remark, hos_state, hos_date
+  </sql>
+  <select id="selectByExample" parameterType="com.kkb.pojo.HosregisterExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hosregister
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hosregister
+    where hos_id = #{hos_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hosregister
+    where hos_id = #{hos_id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kkb.pojo.HosregisterExample">
+    delete from hosregister
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kkb.pojo.Hosregister">
+    insert into hosregister (hos_id, hos_name, hos_idCard, 
+      hos_medical, hos_regPrice, hos_phone, 
+      hos_selfPrice, hos_sex, hos_age, 
+      hos_work, hos_lookDoctor, d_id, 
+      hos_remark, hos_state, hos_date
+      )
+    values (#{hos_id,jdbcType=INTEGER}, #{hos_name,jdbcType=VARCHAR}, #{hos_idCard,jdbcType=VARCHAR}, 
+      #{hos_medical,jdbcType=VARCHAR}, #{hos_regPrice,jdbcType=DOUBLE}, #{hos_phone,jdbcType=VARCHAR}, 
+      #{hos_selfPrice,jdbcType=INTEGER}, #{hos_sex,jdbcType=INTEGER}, #{hos_age,jdbcType=INTEGER}, 
+      #{hos_work,jdbcType=VARCHAR}, #{hos_lookDoctor,jdbcType=INTEGER}, #{d_id,jdbcType=INTEGER}, 
+      #{hos_remark,jdbcType=VARCHAR}, #{hos_state,jdbcType=INTEGER}, #{hos_date,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kkb.pojo.Hosregister">
+    insert into hosregister
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hos_id != null">
+        hos_id,
+      </if>
+      <if test="hos_name != null">
+        hos_name,
+      </if>
+      <if test="hos_idCard != null">
+        hos_idCard,
+      </if>
+      <if test="hos_medical != null">
+        hos_medical,
+      </if>
+      <if test="hos_regPrice != null">
+        hos_regPrice,
+      </if>
+      <if test="hos_phone != null">
+        hos_phone,
+      </if>
+      <if test="hos_selfPrice != null">
+        hos_selfPrice,
+      </if>
+      <if test="hos_sex != null">
+        hos_sex,
+      </if>
+      <if test="hos_age != null">
+        hos_age,
+      </if>
+      <if test="hos_work != null">
+        hos_work,
+      </if>
+      <if test="hos_lookDoctor != null">
+        hos_lookDoctor,
+      </if>
+      <if test="d_id != null">
+        d_id,
+      </if>
+      <if test="hos_remark != null">
+        hos_remark,
+      </if>
+      <if test="hos_state != null">
+        hos_state,
+      </if>
+      <if test="hos_date != null">
+        hos_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hos_id != null">
+        #{hos_id,jdbcType=INTEGER},
+      </if>
+      <if test="hos_name != null">
+        #{hos_name,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_idCard != null">
+        #{hos_idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_medical != null">
+        #{hos_medical,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_regPrice != null">
+        #{hos_regPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="hos_phone != null">
+        #{hos_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_selfPrice != null">
+        #{hos_selfPrice,jdbcType=INTEGER},
+      </if>
+      <if test="hos_sex != null">
+        #{hos_sex,jdbcType=INTEGER},
+      </if>
+      <if test="hos_age != null">
+        #{hos_age,jdbcType=INTEGER},
+      </if>
+      <if test="hos_work != null">
+        #{hos_work,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_lookDoctor != null">
+        #{hos_lookDoctor,jdbcType=INTEGER},
+      </if>
+      <if test="d_id != null">
+        #{d_id,jdbcType=INTEGER},
+      </if>
+      <if test="hos_remark != null">
+        #{hos_remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_state != null">
+        #{hos_state,jdbcType=INTEGER},
+      </if>
+      <if test="hos_date != null">
+        #{hos_date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kkb.pojo.HosregisterExample" resultType="java.lang.Long">
+    select count(*) from hosregister
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hosregister
+    <set>
+      <if test="record.hos_id != null">
+        hos_id = #{record.hos_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hos_name != null">
+        hos_name = #{record.hos_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hos_idCard != null">
+        hos_idCard = #{record.hos_idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hos_medical != null">
+        hos_medical = #{record.hos_medical,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hos_regPrice != null">
+        hos_regPrice = #{record.hos_regPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hos_phone != null">
+        hos_phone = #{record.hos_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hos_selfPrice != null">
+        hos_selfPrice = #{record.hos_selfPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.hos_sex != null">
+        hos_sex = #{record.hos_sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.hos_age != null">
+        hos_age = #{record.hos_age,jdbcType=INTEGER},
+      </if>
+      <if test="record.hos_work != null">
+        hos_work = #{record.hos_work,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hos_lookDoctor != null">
+        hos_lookDoctor = #{record.hos_lookDoctor,jdbcType=INTEGER},
+      </if>
+      <if test="record.d_id != null">
+        d_id = #{record.d_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hos_remark != null">
+        hos_remark = #{record.hos_remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hos_state != null">
+        hos_state = #{record.hos_state,jdbcType=INTEGER},
+      </if>
+      <if test="record.hos_date != null">
+        hos_date = #{record.hos_date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hosregister
+    set hos_id = #{record.hos_id,jdbcType=INTEGER},
+      hos_name = #{record.hos_name,jdbcType=VARCHAR},
+      hos_idCard = #{record.hos_idCard,jdbcType=VARCHAR},
+      hos_medical = #{record.hos_medical,jdbcType=VARCHAR},
+      hos_regPrice = #{record.hos_regPrice,jdbcType=DOUBLE},
+      hos_phone = #{record.hos_phone,jdbcType=VARCHAR},
+      hos_selfPrice = #{record.hos_selfPrice,jdbcType=INTEGER},
+      hos_sex = #{record.hos_sex,jdbcType=INTEGER},
+      hos_age = #{record.hos_age,jdbcType=INTEGER},
+      hos_work = #{record.hos_work,jdbcType=VARCHAR},
+      hos_lookDoctor = #{record.hos_lookDoctor,jdbcType=INTEGER},
+      d_id = #{record.d_id,jdbcType=INTEGER},
+      hos_remark = #{record.hos_remark,jdbcType=VARCHAR},
+      hos_state = #{record.hos_state,jdbcType=INTEGER},
+      hos_date = #{record.hos_date,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kkb.pojo.Hosregister">
+    update hosregister
+    <set>
+      <if test="hos_name != null">
+        hos_name = #{hos_name,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_idCard != null">
+        hos_idCard = #{hos_idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_medical != null">
+        hos_medical = #{hos_medical,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_regPrice != null">
+        hos_regPrice = #{hos_regPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="hos_phone != null">
+        hos_phone = #{hos_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_selfPrice != null">
+        hos_selfPrice = #{hos_selfPrice,jdbcType=INTEGER},
+      </if>
+      <if test="hos_sex != null">
+        hos_sex = #{hos_sex,jdbcType=INTEGER},
+      </if>
+      <if test="hos_age != null">
+        hos_age = #{hos_age,jdbcType=INTEGER},
+      </if>
+      <if test="hos_work != null">
+        hos_work = #{hos_work,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_lookDoctor != null">
+        hos_lookDoctor = #{hos_lookDoctor,jdbcType=INTEGER},
+      </if>
+      <if test="d_id != null">
+        d_id = #{d_id,jdbcType=INTEGER},
+      </if>
+      <if test="hos_remark != null">
+        hos_remark = #{hos_remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hos_state != null">
+        hos_state = #{hos_state,jdbcType=INTEGER},
+      </if>
+      <if test="hos_date != null">
+        hos_date = #{hos_date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where hos_id = #{hos_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kkb.pojo.Hosregister">
+    update hosregister
+    set hos_name = #{hos_name,jdbcType=VARCHAR},
+      hos_idCard = #{hos_idCard,jdbcType=VARCHAR},
+      hos_medical = #{hos_medical,jdbcType=VARCHAR},
+      hos_regPrice = #{hos_regPrice,jdbcType=DOUBLE},
+      hos_phone = #{hos_phone,jdbcType=VARCHAR},
+      hos_selfPrice = #{hos_selfPrice,jdbcType=INTEGER},
+      hos_sex = #{hos_sex,jdbcType=INTEGER},
+      hos_age = #{hos_age,jdbcType=INTEGER},
+      hos_work = #{hos_work,jdbcType=VARCHAR},
+      hos_lookDoctor = #{hos_lookDoctor,jdbcType=INTEGER},
+      d_id = #{d_id,jdbcType=INTEGER},
+      hos_remark = #{hos_remark,jdbcType=VARCHAR},
+      hos_state = #{hos_state,jdbcType=INTEGER},
+      hos_date = #{hos_date,jdbcType=TIMESTAMP}
+    where hos_id = #{hos_id,jdbcType=INTEGER}
+  </update>
+</mapper>
